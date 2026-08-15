@@ -1,5 +1,7 @@
 # Flux: a functional language
 
+> **WARNING**: Flux is in an indev stage. It may be unstable or bug prose.
+
 ## What is Flux
 Flux is my new programming language, this time oriented to functional programming, more precisely, everything in Flux is a data flux, as seen in the example section.
 
@@ -27,6 +29,9 @@ it will output:
 ```
 Hi,Flux
 ```
+
+## Known bugs
+- Doesnt detect strings with spaces correctly
 
 ## What are stdregs
 Stdregs is the way Flux's standard variables are called. 
