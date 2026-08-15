@@ -7,22 +7,40 @@ Flux is my new programming language, this time oriented to functional programmin
 Flux has **just been started**, with today the first movement to stdout being done.
 
 ## Example
-For printing to screen, you can use the left copy operator (<) to move a data to **@stdout**.
+For printing to screen, you can use the left copy operator (< and >) to move a data to **@stdout**.
+
+`main.flxx`:
 ```
-@stdout < "Hi"
+@stdout < "Hi,";
+"Flux" > @stdout;
 ```
 
 Then, you can execute the VM:
 
 ```bash
-cd vm
-go run .
+flux run main.flxx 
 ```
+
+_Change "flux" to the actual executable_
 
 it will output:
 ```
-"Hi"
+Hi,Flux
 ```
 
+## What are stdregs
+Stdregs is the way Flux's standard variables are called. 
+
+A example of a stdreg is **@stdout** and future **@stdin**.
+
 ## Future features
-Coming soon
+
+**Operators**:
+->: right move (copy & delete)
+<-: right move (copy & delete)
+
+**Stdregs**:
+@stdin
+
+**Functionalities**:
+- Variable saving and retrieving
