@@ -31,7 +31,7 @@ Hi,Flux
 ```
 
 ## Known bugs
-- Doesnt detect strings with spaces correctly
+**Last Fixed:** Doesn't detect strings with spaces correctly
 
 ## What are stdregs
 Stdregs is the way Flux's standard variables are called. 
