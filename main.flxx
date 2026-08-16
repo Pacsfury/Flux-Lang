@@ -1,2 +1,2 @@
-@stdout < "Hi, ";
-"welcome to Flux" > @stdout;
+var < "Hia, ";
+var > @stdout;

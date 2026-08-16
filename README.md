@@ -28,8 +28,17 @@ For printing to screen, you can use the left copy operator (< and >) to move a d
 @stdout < "Hi,";
 "Flux" > @stdout;
 ```
+Now, you can also save and use variables, so we will make another example:
 
-Then, you can execute the VM:
+`main.flxx`:
+```
+@stdout < "Hi, ";
+"Flux" > @stdout;
+variable < ", Welcome";
+@stdout < variable;
+```
+
+Then, you can execute the code:
 
 ```bash
 flux run main.flxx 
@@ -39,7 +48,7 @@ _Change "flux" to the actual executable_
 
 it will output:
 ```
-Hi,Flux
+Hi, Flux, Welcome
 ```
 
 ## Known bugs
@@ -61,5 +70,3 @@ A example of a stdreg is **@stdout** and future **@stdin**.
 **Stdregs**:
 @stdin
 
-**Functionalities**:
-- Variable saving and retrieving

@@ -1,0 +1,4 @@
+variable < "Welcome to Flux";
+@stdout < variable;
+variable < "This is stored at the same var!";
+variable > @stdout;

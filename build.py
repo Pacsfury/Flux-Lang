@@ -16,4 +16,4 @@ def execute(compiler="g++", executable="flux", filename="main.flxx", is_compiled
         build(compiler)
         execute(compiler=compiler, filename=filename, is_compiled=True)
 
-execute(filename="tests/flow.flxx")
+execute(compiler="cl", filename="main.flxx", is_compiled=False)
