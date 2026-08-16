@@ -1,5 +1,3 @@
-#include "../include/codegen.hpp"
-
 #include <algorithm>
 #include <cstdio>
 #include <iostream>
@@ -7,6 +5,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "../include/codegen.hpp"
 #include "../include/tokenizer.hpp"
 
 void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
