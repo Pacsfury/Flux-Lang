@@ -1,8 +1,8 @@
-#include "../include/tokenizer.hpp"
-
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include "../include/tokenizer.hpp"
 
 std::pair<std::vector<Token>, int>& getTokens(std::string src) {
     std::vector<Token> tokens;
