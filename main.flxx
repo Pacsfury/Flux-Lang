@@ -1,4 +1,3 @@
-welcome < "Welcome to Flux, a new programming language. ";
-whatisit < "Flux is a programming language where everything is a data flow";
-welcome > @stdout;
-whatisit > @stdout;
+"Hello" > var;
+
+var > @stdout;

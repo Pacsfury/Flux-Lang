@@ -20,8 +20,7 @@ bool ArgsContext::hasArg(std::string_view argName) const {
     return false;
 }
 
-std::optional<std::string_view> ArgsContext::getArg(
-    std::string_view argName) const {
+std::optional<std::string_view> ArgsContext::getArg(std::string_view argName) const {
     for (size_t i = 0; i < m_args.size(); ++i) {
         if (m_args[i] == argName) {
             if (i + 1 < m_args.size()) {

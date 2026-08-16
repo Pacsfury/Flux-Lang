@@ -33,11 +33,10 @@ std::pair<std::vector<Token>, int>& getTokens(std::string src) {
                 size_t j = 0;
                 bool is_on_string = false;
 
-                while (idx + j < src.length() &&
-                       (!std::isspace(src[idx + j]) || is_on_string) &&
-                       src[idx + j] != '<' && src[idx + j] != '>' &&
-                       src[idx + j] != ';') {
-                    if (src[idx + j] == '"') is_on_string = !is_on_string;
+                while (idx + j < src.length() && (!std::isspace(src[idx + j]) || is_on_string) && src[idx + j] != '<' &&
+                       src[idx + j] != '>' && src[idx + j] != ';') {
+                    if (src[idx + j] == '"')
+                        is_on_string = !is_on_string;
                     buffer += src[idx + j];
                     j++;
                 }

@@ -23,8 +23,7 @@ int main(int argc, char* argv[]) {
             return 1;
         }
 
-        std::string source((std::istreambuf_iterator<char>(file)),
-                           std::istreambuf_iterator<char>());
+        std::string source((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 
         auto tokens = getTokens(source);
         generateCode(tokens);
