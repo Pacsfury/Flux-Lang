@@ -9,6 +9,12 @@
 
 void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
     FILE* output = fopen("vm/program.gosb", "w");
+
+    if (!output) {
+        std::cerr << "Error: Couldn't open output file.\n";
+        return;
+    }
+
     std::unordered_map<std::string, int> substacks;
 
     std::string next = "";

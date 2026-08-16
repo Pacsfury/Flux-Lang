@@ -8,6 +8,18 @@ Flux is my new programming language, this time oriented to functional programmin
 ## Status
 Flux has **just been started**, with today the first movement to stdout being done.
 
+## Build and execute using Python
+
+**Building the executable**:
+1. Go to `build.py` amd add a funtion call at the end, like this:
+```python
+build("yourcompiler") # Default compiler is g++
+```
+2. Once compiled, you can execute a `.flxx` file:
+```python
+execute(compiler="yourcompiler", filename="abc.flxx") # There are other default fields, full info at build.py
+```
+
 ## Example
 For printing to screen, you can use the left copy operator (< and >) to move a data to **@stdout**.
 
