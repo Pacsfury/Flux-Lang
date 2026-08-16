@@ -1,10 +1,11 @@
 #pragma once
-#include <iostream>
-#include <vector>
+#include <algorithm>
 #include <cstdio>
+#include <iostream>
 #include <string>
 #include <unordered_map>
-#include <algorithm>
+#include <vector>
+
 #include "tokenizer.hpp"
 
 void generateCode(const std::pair<std::vector<Token>, int>& tokenData);

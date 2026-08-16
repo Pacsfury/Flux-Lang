@@ -3,12 +3,7 @@
 #include <string>
 #include <vector>
 
-enum TokenType {
-    name,
-    lcpy,
-    rcpy,
-    semicolon
-};
+enum TokenType { name, lcpy, rcpy, semicolon };
 
 struct Token {
     TokenType type;

@@ -1,11 +1,13 @@
-#include <iostream>
-#include <vector>
+#include "../include/codegen.hpp"
+
+#include <algorithm>
 #include <cstdio>
+#include <iostream>
 #include <string>
 #include <unordered_map>
-#include <algorithm>
+#include <vector>
+
 #include "../include/tokenizer.hpp"
-#include "../include/codegen.hpp"
 
 void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
     FILE* output = fopen("vm/program.gosb", "w");
@@ -19,9 +21,9 @@ void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
 
     std::string next = "";
     std::string mode = "";
-    std::string gen  = "";
+    std::string gen = "";
 
-    for (size_t i = 0; i<tokenData.second;i++) {
+    for (size_t i = 0; i < tokenData.second; i++) {
         switch (tokenData.first[i].type) {
             case TokenType::name:
                 if (tokenData.first[i].value == "@stdout") {
@@ -29,16 +31,19 @@ void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
                         gen += "SCRT, 5, SGO, 5";
                         std::string str = next;
 
-                        str.erase(std::remove_if(str.begin(), str.end(), [](char c) {
-                            return c == '"' || c == '\'';
-                        }), str.end());
+                        str.erase(
+                            std::remove_if(
+                                str.begin(), str.end(),
+                                [](char c) { return c == '"' || c == '\''; }),
+                            str.end());
 
-                        for (int j = 0; j<str.size(); j++) {
-                            gen += ", PUSH, " + std::to_string(static_cast<int>(str[j]));
+                        for (int j = 0; j < str.size(); j++) {
+                            gen += ", PUSH, " +
+                                   std::to_string(static_cast<int>(str[j]));
                             gen += ", SPUSH";
                         }
-                        gen +=  ", SRUN, COUT, SDROP, 5,";
-                        
+                        gen += ", SRUN, COUT, SDROP, 5,";
+
                         fprintf(output, "%s", gen.c_str());
                         gen = "";
                         mode = "";
@@ -49,16 +54,19 @@ void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
                         gen += "SCRT, 5, SGO, 5";
                         std::string str = tokenData.first[i].value;
 
-                        str.erase(std::remove_if(str.begin(), str.end(), [](char c) {
-                            return c == '"' || c == '\'';
-                        }), str.end());
+                        str.erase(
+                            std::remove_if(
+                                str.begin(), str.end(),
+                                [](char c) { return c == '"' || c == '\''; }),
+                            str.end());
 
-                        for (int j = 0; j<str.size(); j++) {
-                            gen += ", PUSH, " + std::to_string(static_cast<int>(str[j]));
+                        for (int j = 0; j < str.size(); j++) {
+                            gen += ", PUSH, " +
+                                   std::to_string(static_cast<int>(str[j]));
                             gen += ", SPUSH";
                         }
-                        gen +=  ", SRUN, COUT, SDROP, 5,";
-                        
+                        gen += ", SRUN, COUT, SDROP, 5,";
+
                         fprintf(output, "%s", gen.c_str());
                         gen = "";
                         mode = "";
@@ -70,12 +78,14 @@ void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
             case TokenType::lcpy:
                 mode = "lcpy";
                 break;
+
             case TokenType::rcpy:
                 mode = "rcpy";
                 break;
+
             case TokenType::semicolon:
                 mode = "";
-                gen  = "";
+                gen = "";
                 next = "";
                 break;
         }
