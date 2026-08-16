@@ -1,0 +1,2 @@
+@stdout < "Welcome";
+". To Flux" > @stdout;

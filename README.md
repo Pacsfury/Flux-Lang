@@ -43,6 +43,8 @@ Hi,Flux
 ```
 
 ## Known bugs
+- **"I'm" > " OK" > ", thanks" > @stdout;** Doesnt work left-to-right
+
 **Last Fixed:** Doesn't detect strings with spaces correctly
 
 ## What are stdregs

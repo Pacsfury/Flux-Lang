@@ -40,6 +40,7 @@ void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
                         gen +=  ", SRUN, COUT, SDROP, 5,";
                         
                         fprintf(output, "%s", gen.c_str());
+                        gen = "";
                         mode = "";
                     }
                     next = "@stdout";
@@ -59,6 +60,7 @@ void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
                         gen +=  ", SRUN, COUT, SDROP, 5,";
                         
                         fprintf(output, "%s", gen.c_str());
+                        gen = "";
                         mode = "";
                     } else if (mode == "") {
                         next = tokenData.first[i].value;

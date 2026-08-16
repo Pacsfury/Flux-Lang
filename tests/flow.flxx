@@ -1,0 +1,2 @@
+@stdout < "Hi" < ", how" < " are" < " you?             ";
+"I'm OK, thanks" > @stdout;
