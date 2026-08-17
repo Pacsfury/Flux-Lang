@@ -1,0 +1,4 @@
+"Welcome" > b;
+a <- b; / Here b dissappears /
+@stdout < a;
+@stdout < b;
