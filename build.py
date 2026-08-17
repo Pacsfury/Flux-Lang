@@ -1,8 +1,11 @@
 import subprocess
 
+
 def build(compiler="g++"):
     if compiler == "cl":
-        subprocess.run(["cl", "src/*.cpp", "/EHsc", "/std:c++17", "/Fe:flux"], shell=True)
+        subprocess.run(
+            ["cl", "src/*.cpp", "/EHsc", "/std:c++17", "/Fe:flux"], shell=True
+        )
     elif compiler in ["g++", "clang++"]:
         subprocess.run(f"{compiler} src/*.cpp -std=c++17 -o flux", shell=True)
     else:
@@ -15,5 +18,6 @@ def execute(compiler="g++", executable="flux", filename="main.flxx", is_compiled
     else:
         build(compiler)
         execute(compiler=compiler, filename=filename, is_compiled=True)
+
 
 execute(compiler="cl", filename="main.flxx", is_compiled=False)
