@@ -9,3 +9,7 @@
 #include "tokenizer.hpp"
 
 void generateCode(const std::pair<std::vector<Token>, int>& tokenData);
+
+std::string print(const std::string& text);
+
+std::string clean(std::string str);
