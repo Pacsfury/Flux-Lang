@@ -31,6 +31,8 @@ In both `a == b`.
 ### Moving
 `a<-b`, `b->a`
 
+In both, `b` is deleted.
+
 ### Comments
 
 ```
