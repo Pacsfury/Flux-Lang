@@ -1,7 +1,7 @@
+#include <cctype>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <cctype>
 
 #include "../include/tokenizer.hpp"
 
@@ -19,7 +19,7 @@ std::pair<std::vector<Token>, int> getTokens(std::string src) {
         Token tok;
         switch (actual) {
             case '<':
-                if (src[idx] +1 == '-') {
+                if (src[idx] + 1 == '-') {
                     tok.type = TokenType::lmov;
                 } else {
                     tok.type = TokenType::lcpy;
@@ -27,7 +27,7 @@ std::pair<std::vector<Token>, int> getTokens(std::string src) {
                 tokens.push_back(tok);
                 break;
             case '-':
-                if (src[idx] +1 == '>') {
+                if (src[idx] + 1 == '>') {
                     tok.type = TokenType::rmov;
                 }
                 tokens.push_back(tok);
@@ -41,33 +41,32 @@ std::pair<std::vector<Token>, int> getTokens(std::string src) {
                 tokens.push_back(tok);
                 break;
             case '/':
-                if (!is_on_string) {
+                idx++;
+                while (idx < src.length() && src[idx] != '/') {
                     idx++;
-                    while (idx < src.length() && src[idx] != '/') {
-                        idx++;
-                    }
-                    if (idx >= src.length()) {
-                        idx = src.length() - 1; 
-                    }
-                    break;
                 }
+                if (idx >= src.length()) {
+                    idx = src.length() - 1;
+                }
+                break;
+
             default: {
-              std::string buffer = "";
-                
+                std::string buffer = "";
+
                 while (idx < src.length()) {
                     char c = src[idx];
-                    
+
                     if (c == '"') {
                         is_on_string = !is_on_string;
                     }
-                    
+
                     if (!is_on_string) {
-                        if (std::isspace(static_cast<unsigned char>(c)) || 
-                            c == '<' || c == '>' || c == ';' || c == '/') {
-                            break; 
+                        if (std::isspace(static_cast<unsigned char>(c)) || c == '<' || c == '>' || c == ';' ||
+                            c == '/') {
+                            break;
                         }
                     }
-                    
+
                     buffer += c;
                     idx++;
                 }
@@ -78,7 +77,7 @@ std::pair<std::vector<Token>, int> getTokens(std::string src) {
                     tokens.push_back(tok);
                 }
 
-                idx--; 
+                idx--;
                 break;
             }
         }
