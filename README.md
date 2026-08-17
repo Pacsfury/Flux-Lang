@@ -31,6 +31,14 @@ In both `a == b`.
 ### Moving
 `a<-b`, `b->a`
 
+### Comments
+
+```
+a / A comment here is valid / < b;
+/ Here too/
+/You can put them anywhere (not inside of a string) /
+```
+
 In both, `b` dissappears.
 
 ## Example
