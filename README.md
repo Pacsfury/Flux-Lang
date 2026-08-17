@@ -20,6 +20,19 @@ build("yourcompiler") # Default compiler is g++
 execute(compiler="yourcompiler", filename="abc.flxx") # There are other default fields, full info at build.py
 ```
 
+## Syntax
+
+### Copying
+
+`a<b`, `b>a`
+
+In both `a == b`.
+
+### Moving
+`a<-b`, `b->a`
+
+In both, `b` dissappears.
+
 ## Example
 For printing to screen, you can use the left copy operator (< and >) to move a data to **@stdout**.
 
@@ -65,8 +78,7 @@ A example of a stdreg is **@stdout** and future **@stdin**.
 ## Future features
 
 **Operators**:
-->: right move (copy & delete)
-<-: right move (copy & delete)
+*None*
 
 **Stdregs**:
 @stdin

@@ -19,7 +19,17 @@ std::pair<std::vector<Token>, int> getTokens(std::string src) {
         Token tok;
         switch (actual) {
             case '<':
-                tok.type = TokenType::lcpy;
+                if (src[idx] +1 == '-') {
+                    tok.type = TokenType::lmov;
+                } else {
+                    tok.type = TokenType::lcpy;
+                }
+                tokens.push_back(tok);
+                break;
+            case '-':
+                if (src[idx] +1 == '>') {
+                    tok.type = TokenType::rmov;
+                }
                 tokens.push_back(tok);
                 break;
             case '>':

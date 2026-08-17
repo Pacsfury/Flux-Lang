@@ -1,5 +1,4 @@
-/ This is a comment! /
-
-@stdout < "hi";
-@stdout > var;   / @stdout is also a variable /
-@stdout < / A comment here? Why not? / var; 
+abc < "ads";
+a <- abc;
+@stdout < abc;
+@stdout < a;

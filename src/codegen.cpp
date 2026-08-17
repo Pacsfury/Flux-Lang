@@ -21,13 +21,40 @@ std::string print(const std::string& text) {
 }
 
 std::string clean(std::string str) {
-    //// TODO: ADD A STRING TOKEN TYPE
     if (str.size() >= 2 && (str.front() == '"' || str.front() == '\'') && str.back() == str.front()) {
         return str.substr(1, str.size() - 2);
-    } else {
-        return clean(vars[str]);
     }
+
+    auto it = vars.find(str);
+    if (it != vars.end()) {
+        return clean(it->second);
+    } else {
+        return "";
+    }
+
     return str;
+}
+
+static void handleCopy(const std::string& source, const std::string& target, FILE* output) {
+    if (target == "@stdout") {
+        fprintf(output, "%s", print(clean(source)).c_str());
+    }
+    vars[target] = source;
+}
+
+static void handleMove(const std::string& source, const std::string& target, FILE* output) {
+    if (target == "@stdout") {
+        fprintf(output, "%s", print(clean(source)).c_str());
+    }
+
+    std::string val = source;
+    auto it = vars.find(source);
+    if (it != vars.end()) {
+        val = it->second;
+        vars.erase(it);
+    }
+
+    vars[target] = val;
 }
 
 void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
@@ -44,25 +71,20 @@ void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
     for (size_t i = 0; i < tokenCount; i++) {
         switch (tokens[i].type) {
             case TokenType::name:
-                if (mode == "rcpy" && i >= 2) {
-                    const std::string& source = tokens[i - 2].value;
-                    const std::string& target = tokens[i].value;
-
-                    if (target == "@stdout") {
-                        fprintf(output, "%s", print(clean(source)).c_str());
+                if (i >= 2) {
+                    if (mode == "rcpy") {
+                        handleCopy(tokens[i - 2].value, tokens[i].value, output);
+                        mode = "";
+                    } else if (mode == "lcpy") {
+                        handleCopy(tokens[i].value, tokens[i - 2].value, output);
+                        mode = "";
+                    } else if (mode == "rmov") {
+                        handleMove(tokens[i - 2].value, tokens[i].value, output);
+                        mode = "";
+                    } else if (mode == "lmov") {
+                        handleMove(tokens[i].value, tokens[i - 2].value, output);
+                        mode = "";
                     }
-                    vars[target] = source;
-                    mode = "";
-                } else if (mode == "lcpy" && i >= 2) {
-                    const std::string& target = tokens[i - 2].value;
-                    const std::string& source = tokens[i].value;
-
-                    if (target == "@stdout") {
-                        fprintf(output, "%s", print(clean(source)).c_str());
-                    }
-                    vars[target] = source;
-
-                    mode = "";
                 }
                 break;
 
@@ -72,6 +94,14 @@ void generateCode(const std::pair<std::vector<Token>, int>& tokenData) {
 
             case TokenType::rcpy:
                 mode = "rcpy";
+                break;
+
+            case TokenType::lmov:
+                mode = "lmov";
+                break;
+
+            case TokenType::rmov:
+                mode = "rmov";
                 break;
 
             case TokenType::semicolon:

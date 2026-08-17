@@ -1,10 +1,10 @@
 #pragma once
+#include <cctype>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <cctype>
 
-enum TokenType { name, lcpy, rcpy, semicolon };
+enum TokenType { name, lcpy, rcpy, lmov, rmov, semicolon };
 
 struct Token {
     TokenType type;
