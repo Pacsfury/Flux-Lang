@@ -32,8 +32,9 @@ Now, you can also save and use variables, so we will make another example:
 
 `main.flxx`:
 ```
+/ This is a comment /
 @stdout < "Hi, ";
-"Flux" > @stdout;
+"Flux" > / You can put comments here/ @stdout;
 variable < ", Welcome";
 @stdout < variable;
 ```
