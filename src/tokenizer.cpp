@@ -1,16 +1,18 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cctype>
 
 #include "../include/tokenizer.hpp"
 
-std::pair<std::vector<Token>, int>& getTokens(std::string src) {
+std::pair<std::vector<Token>, int> getTokens(std::string src) {
     std::vector<Token> tokens;
+    bool is_on_string = false;
 
     for (size_t idx = 0; idx < src.length(); idx++) {
         char actual = src[idx];
 
-        if (std::isspace(actual)) {
+        if (!is_on_string && std::isspace(actual)) {
             continue;
         }
 
@@ -28,32 +30,51 @@ std::pair<std::vector<Token>, int>& getTokens(std::string src) {
                 tok.type = TokenType::semicolon;
                 tokens.push_back(tok);
                 break;
+            case '/':
+                if (!is_on_string) {
+                    idx++;
+                    while (idx < src.length() && src[idx] != '/') {
+                        idx++;
+                    }
+                    if (idx >= src.length()) {
+                        idx = src.length() - 1; 
+                    }
+                    break;
+                }
             default: {
-                std::string buffer = "";
-                size_t j = 0;
-                bool is_on_string = false;
-
-                while (idx + j < src.length() && (!std::isspace(src[idx + j]) || is_on_string) && src[idx + j] != '<' &&
-                       src[idx + j] != '>' && src[idx + j] != ';') {
-                    if (src[idx + j] == '"')
+              std::string buffer = "";
+                
+                while (idx < src.length()) {
+                    char c = src[idx];
+                    
+                    if (c == '"') {
                         is_on_string = !is_on_string;
-                    buffer += src[idx + j];
-                    j++;
+                    }
+                    
+                    if (!is_on_string) {
+                        if (std::isspace(static_cast<unsigned char>(c)) || 
+                            c == '<' || c == '>' || c == ';' || c == '/') {
+                            break; 
+                        }
+                    }
+                    
+                    buffer += c;
+                    idx++;
                 }
 
-                tok.type = TokenType::name;
-                tok.value = buffer;
-                tokens.push_back(tok);
+                if (!buffer.empty()) {
+                    tok.type = TokenType::name;
+                    tok.value = buffer;
+                    tokens.push_back(tok);
+                }
 
-                idx += j - 1;
+                idx--; 
                 break;
             }
         }
     }
 
-    static std::pair<std::vector<Token>, int> pair;
-    pair = {tokens, static_cast<int>(tokens.size())};
-    return pair;
+    return {tokens, static_cast<int>(tokens.size())};
 }
 
 void printTokens(const std::pair<std::vector<Token>, int>& tokenData) {
