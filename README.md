@@ -75,6 +75,13 @@ it will output:
 Hi, Flux, Welcome
 ```
 
+## The stack
+**Frontend**: C++
+
+**Virtual Machine**: Go
+
+**Tests & build scripts**: Python
+
 ## Known bugs
 - **"I'm" > " OK" > ", thanks" > @stdout;** Doesnt work left-to-right
 
